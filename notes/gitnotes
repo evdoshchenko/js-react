@@ -16,3 +16,4 @@ git push -u origin main
 
             git clone https://github.com/evdoshchenko/js-react.git PROJECT_2
         git pull
+            ctrl+c   ctrl+c   :wq!
