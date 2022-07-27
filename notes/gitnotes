@@ -13,6 +13,7 @@ git commit -a -m"first commit"
         git remote add origin https://github.com/evdoshchenko/js-react.git
         git branch -M main
 git push -u origin main
+git push
 
             git clone https://github.com/evdoshchenko/js-react.git PROJECT_2
         git pull

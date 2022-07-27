@@ -1,5 +1,119 @@
 "use sctrict";
 
 // intepolation
-const category = 'toys';
-console.log(`https://someurl.com/${category}/5`);
+{
+    const category = 'toys';
+    console.log(`https://someurl.com/${category}/5`);
+}
+// objects 
+{
+    const a = 1;
+    const DB = {
+        count: a,
+        movies: {}
+    };
+    const b = "tenet",
+          c = 10;
+    DB.movies[b] = c;
+}
+// if
+{
+    if (4 == 9) {
+        console.log("ok!");
+    } else {
+        console.log("error");
+    }
+}
+// ternary operator
+{
+    (4 === 4) ? console.log('ok!') : console.log('error');
+}
+// switch
+{
+    switch (4) {
+        case 3: 
+            console.log("error");
+            break;
+        case 4: 
+            console.log("ok");
+            break;
+        case "4": 
+            console.log("error - only ===");
+            break;
+        default:
+            console.log("no internet");
+    }
+}
+// while do
+{
+    let i = 50;
+    while (i <= 53) {
+        console.log(i);
+        i++;
+    }
+    do {
+        console.log(i);
+        i--;
+    } 
+    while (i >= 50);
+}
+// for continue break
+{
+    for (let i = 1; i <= 5; i++) {
+        if (i == 2) {
+            continue;
+        }
+        if (i == 4) {
+            break;
+        }
+        console.log(i);
+    } 
+}
+// function declaration
+{
+    function sumFunction(a, b) {
+        return (a+b);
+    }
+    console.log(sumFunction(2,7));
+}
+// fucntion expression
+{
+  //logFunctionExp(); - error - only after
+    const logFunctionExp = function() {
+        console.log("hello");
+    };//!
+    logFunctionExp(); 
+}
+// arrow function
+{
+    const helloName = name => "Hello " + name;
+    console.log(helloName('Upp'));
+
+    const multiplicationFunction = (a,b) => a * b;
+    console.log(multiplicationFunction(4,7));
+
+    const divisionFunction = (a,b) => {return a / b};
+    console.log(divisionFunction(56,8));
+}
+// property
+{
+    const strProperty = 'test';
+    console.log(strProperty.length); // without ()
+}
+// methods strings
+{
+    const strMethod = 'hello, world';
+    console.log(strMethod.toUpperCase());
+    console.log(strMethod.indexOf('world'));
+    console.log(strMethod.slice(7,12));
+    console.log(strMethod.substring(7,12));
+    console.log(strMethod.substr(7,5));
+}
+// methods numbers
+{
+    const numMethod = 12.2;
+    console.log(Math.round(numMethod)); // 12
+    const stringToNumber = "14.2px";
+    console.log(parseInt(stringToNumber)); // 14
+    console.log(parseFloat(stringToNumber)); // 14.2
+}
