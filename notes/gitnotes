@@ -1,0 +1,18 @@
+        git init
+
+        git config --global user.name "Danil"       
+        git config --global user.email "ev8ko@icloud.com"
+
+    git status
+
+git add -A
+git commit -a -m"first commit" 
+
+    git log
+
+        git remote add origin https://github.com/evdoshchenko/js-react.git
+        git branch -M main
+git push -u origin main
+
+            git clone https://github.com/evdoshchenko/js-react.git PROJECT_2
+        git pull
