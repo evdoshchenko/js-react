@@ -117,3 +117,228 @@
     console.log(parseInt(stringToNumber)); // 14
     console.log(parseFloat(stringToNumber)); // 14.2
 }
+// callback
+{
+    function learnProgramming(lang, callback) {
+        console.log(`I learn${lang}`);
+        callback();
+    }
+    
+    function learnAlgorithms(){
+        console.log('I learn algorithms');
+    }
+    learnProgramming('JavaScript', learnAlgorithms);
+    
+    learnProgramming('JavaScript', function(){
+        console.log('I learn 1 lesson');
+    });
+}
+// objects   delete   for in
+{
+    const options = {
+        name: 'test',
+        width: 1024,
+        height: 1024,
+        colors: {
+            border: 'black',
+            bg: 'red'
+        },
+        makeTest: function() {
+            console.log('Test')
+        }
+    };
+    
+    options.makeTest();
+    console.log(Object.keys(options).length); // counts of property
+    delete options.name;
+    
+    for (let key in options) {
+        console.log(`Property ${key} is ${options[key]}`);
+    }
+    
+    const {border, bg} = options.colors; // destructuring
+    console.log(border);
+}
+// array sort
+{
+    const arr = [1, 2, 3, 6, 8];
+    arr.pop(); // 1, 2, 3, 6
+    arr.push(10); // 1, 2, 3, 6, 10
+    // arr[8] = 0; arr.length == 8 + 1 == 9
+
+    for (let i=0; i < arr.length; i++) {
+        console.log(arr[i]);
+    }
+    for (let value of arr) {
+        console.log(value);
+    }
+    arr.forEach( function() {
+        console.log("item");
+    });
+    arr.forEach( function(item, i, arr) { // or function(item)
+        console.log(`${i}: ${item} inside ${arr}`);
+    });
+    // arr.map arr.every arr.some arr.filte arr.reduce
+
+    const str = "Lemon. Apple. Tomato"
+    const productsArray = str.split(". "); // [ 'Lemon', 'Apple', 'Tomato' ]
+    const productsSortedStringNotNumbers = productsArray.sort(); // [ 'Apple', 'Lemon', 'Tomato' ]
+    const productsString = productsArray.join("; "); // Lemon; Apple; Tomato
+
+    const arrayNumbers = [44, 23, 6, 72, 8];
+    const sortedArrayNumbers = arrayNumbers.sort(compareNum); // [ 6, 8, 23, 44, 72 ]
+    function compareNum(a, b) {
+        return a-b;
+    }
+    const sortedCallbackArrayNumbers = arrayNumbers.sort(function(a,b) {return a-b;}); // [ 6, 8, 23, 44, 72 ]
+
+    console.log(sortedCallbackArrayNumbers);
+}
+// objects = link 
+{
+    const obj = { a: 5, b: 1 };
+
+    const linkObj = obj; // link!
+    linkObj.a = 10; // { a: 10, b: 1 } { a: 10, b: 1 }
+    
+    const newObj = copy(obj); // copy superficial
+    function copy(mainObj) { 
+        let objCopy = {};
+        let key;
+        for (key in mainObj) {
+            objCopy[key] = mainObj[key];
+        }
+        return objCopy;
+    }
+    newObj.a = 20; // { a: 10, b: 1 } { a: 20, b: 1 }
+    
+    const addObj = { j: 4, k: 9}
+    console.log(Object.assign(newObj, addObj)); // { a: 20, b: 1, j: 4, k: 9 }
+    
+    const cloneObj = Object.assign({}, obj);
+    cloneObj.a = 20;  // { a: 10, b: 1 } { a: 20, b: 1 }    
+}
+// arrays = link 
+{
+    const oldArray = ['a', 'b', 'c'];
+    const newArray = oldArray.slice();
+    newArray[1] = 'x'; // [ 'a', 'b', 'c' ] [ 'a', 'x', 'c' ]
+    
+    const video = ['youtube', 'vimeo', 'tube'],
+          blogs = ['wordpress', 'livejournal', 'blogger'],
+          internet = [...video, ...blogs, 'facebook'];
+    console.log(internet);
+    
+    function log(a, b, c) {
+        console.log(a);
+        console.log(b);
+        console.log(c);
+    }
+    const num = [2, 5, 7];
+    log(...num); // 2 // 5 // 7
+    
+    const array = ["a", "b"];
+    const spreadArray = [...array]; // [ 'a', 'b' ]
+    
+    const object = { one: 1, two: 2 };
+    const spreadObject = {...object};
+    console.log(spreadObject); // { one: 1, two: 2 }
+}
+// object inheritance
+{
+    const soldier = {
+        health: 400,
+        armor: 100
+    };
+    const dynamicSoldier = {
+        health: 100
+    };
+    // john.__proto__ = soldier;  - old dynamic
+    Object.setPrototypeOf(dynamicSoldier, soldier);
+    const staticSoldier = Object.create(soldier);
+}
+// dynamic typing to String
+{
+    console.log(typeof(String(null)));
+    console.log(typeof(null + ''));
+}
+// dynamic typing to Number
+{
+    console.log(typeof(Number('456')));
+    console.log(typeof(+'5'));
+    console.log(typeof(parseInt("15px", 10)));
+}
+// dynamic typing to Boolean
+{
+    // false == 0 == '' == null == undefined == NaN
+    console.log(typeof(1));
+    console.log(typeof(Boolean(null)));
+    console.log(typeof(!!"456"));
+}
+// get elements
+{
+    const box = document.getElementById('box');
+    console.log(box);
+
+    const btns = document.getElementsByTagName('button');
+    const btn1 = document.getElementsByTagName('button')[0];
+    console.log(btn1);
+
+    const circles = document.getElementsByClassName('circle');
+    const circle2 = document.getElementsByClassName('circle')[1];
+    console.log(circle2);
+
+    const hearts = document.querySelectorAll('.heart');
+    const heart1 = document.querySelectorAll('.heart')[0];
+    console.log(heart1);
+    hearts.forEach(item => {
+        console.log(item);
+    });
+
+    const firstHeart = document.querySelector('.heart');
+    console.log(firstHeart);
+}
+// actions with elements
+{
+    const box = document.getElementById('box'),
+          btns = document.getElementsByTagName('button'),
+          circles = document.getElementsByClassName('circle'),
+          wrapper = document.querySelector('.heart'),
+          hearts = document.querySelectorAll('.heart'),
+          firstHeart = wrapper.querySelector('.heart');
+
+    const dynamicWidth = '50%';
+    box.style.cssText = `width: ${dynamicWidth}; border-radius: 5px;`;
+
+    box.style.background = 'green';
+    btns[1].style.borderRadius = '100%';
+    circles[1].style.margin = '50px';
+
+    // for (let i = 0; i < hearts.length; i++) {    // old
+    //     hearts[i].style.background = 'pink';
+    // }
+    hearts.forEach(item => {
+        item.style.margin = '20px';
+    });
+
+    // const text = document.createTextNode('Test');
+    const div = document.createElement('div');
+    div.classList.add('black');
+    document.body.append(div);
+    // document.body.prepend(div);
+    // document.querySelector('.wrapper').append(div);
+    // hearts[0].after(div);
+    // circles[1].remove();
+    // hearts[0].replaceWith(circles[1]);
+
+    // old
+    // document.querySelector('.wrapper').appendChild(div); 
+    // document.querySelector('.wrapper').insertBefore(div, hearts[2]);
+    // document.querySelector('.wrapper').removeChild(hearts[1]);
+    // document.querySelector('.wrapper').replaceChild(circles[0], hearts[0]);
+
+    div.innerHTML = "<h1>Hello</h1>";
+    // div.textContent = "Hi";
+    div.insertAdjacentHTML('beforebegin', '<h2>Ola!</h2>');
+    div.insertAdjacentHTML('afterend', '<h2>Ola-la!</h2>');
+}
