@@ -342,3 +342,107 @@
     div.insertAdjacentHTML('beforebegin', '<h2>Ola!</h2>');
     div.insertAdjacentHTML('afterend', '<h2>Ola-la!</h2>');
 }
+// eventListener add delete once
+{
+    const btn = document.querySelector('button'),
+        disposableBtn = document.getElementById('disposable-btn'),
+        overlay = document.querySelector('.overlay'),
+        p = document.getElementById('status'),
+        btns = document.querySelectorAll('button');
+
+    disposableBtn.addEventListener('mouseenter', () => p.textContent='no push!');
+    disposableBtn.addEventListener('mouseout', () => p.textContent='');
+    disposableBtn.addEventListener('mouseenter', function(e) {e.target.style.background = 'red';});
+    disposableBtn.addEventListener('mouseout', (e) => {e.target.style.background = 'green';});
+
+    const eventInsideElement = (e) => {
+        console.log(e.target); // e.currentTarget
+    }
+    btn.addEventListener('click', eventInsideElement);
+    overlay.addEventListener('click', eventInsideElement);
+
+    const link = document.querySelector('a');
+    link.addEventListener('click', (e) => {
+        e.preventDefault(); // cancel standart browser action
+        console.log(e.target);
+    });
+
+    btns.forEach(button => {
+        button.addEventListener('mouseover', () => {
+            button.style.background = "red";
+        });
+    });
+    // without Option ONCE, delete only identical Object-function by name
+    // const deleteListener = (e) => {  
+    //     alert('listner deleted');
+    //     disposableBtn.removeEventListener('click', deleteListener);
+    // }
+    // disposableBtn.addEventListener('click', deleteListener);
+    // option ONCE
+    disposableBtn.addEventListener('click', () => alert('once!'), {once: true});
+}
+// navigation DOM data-atributes 
+{
+    console.log(document.body);
+    console.log(document.documentElement);
+    console.log(document.body.childNodes);
+    console.log(document.body.firstChild);
+    console.log(document.body.firstElementChild);
+    console.log(document.body.lastChild);
+    console.log(document.querySelector('#current').parentNode.parentNode); // <button id="current"></button>
+
+    // data-atributes 
+    // <div data-name="3"></div>
+    // <div data-close></div> == <div data-close=true></div>
+    console.log(document.querySelector('[data-current="3"]')); // <li data-current="3">3</li>
+    console.log(document.querySelector('[data-current="3"]').nextSibling); // previousSibling
+    console.log(document.querySelector('[data-current="3"]').nextElementSibling); // previousElementSibling
+
+    for (let node of document.body.childNodes) {
+        if (node.nodeName == '#text') {
+            continue;
+        }
+        console.log(node);
+    }
+}
+// mobile events for sliders
+{
+    // touchstart  // touchmove  // touchend  // touchenter  // touchleave  // touchcancel
+    window.addEventListener('DOMContentLoaded', () => {
+        const box = document.querySelector('.box');
+
+        box.addEventListener('touchstart', (e) => {
+            e.preventDefault();   // highly recommended
+            console.log('start');
+            // console.log(e.touches);  // all fingers
+            // console.log(e.targetTouches);   // one finger
+            // console.log(e.changedTouches);   // modified finger
+        });
+        box.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            console.log('move');
+            // console.log(e.targetTouches[0].pageX);  // coordinates
+        });
+        box.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            console.log('end');
+        });
+    });
+}
+// dynamic loaded scripts from js
+{
+    // default async
+    const script = document.createElement('script');
+    script.src = 'js/test.js';
+    document.body.append(script);
+
+    // not async. Script by script
+    function loadScript(src) {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = false;
+        document.body.append(script);
+    }
+    loadScript('js/test.js');
+    loadScript('js/second.js')
+}
