@@ -1,4 +1,4 @@
-"use sctrict";
+"use strict";
 
 // intepolation
 {
@@ -94,6 +94,13 @@
 
     const divisionFunction = (a,b) => {return a / b};
     console.log(divisionFunction(56,8));
+
+    const doubleBig = (a) => {
+        return a * 2;
+    };
+    const doubleMedium = (a) => { return a * 2 };
+    const doubleNormal = a => a * 2;
+    console.log(doubleNormal(54));
 }
 // property
 {
@@ -445,4 +452,243 @@
     }
     loadScript('js/test.js');
     loadScript('js/second.js')
+}
+// classList   delegated events
+{
+    console.log(btns[0].classList.length);
+    console.log(btns[0].classList.item(0));
+    console.log(btns[1].classList.add('red'));
+    console.log(btns[0].classList.remove('blue'));
+    console.log(btns[0].classList.toggle('blue'));
+    btns[1].addEventListener('click', () => {
+        // if (!btns[1].classList.contains('red')) {
+        //     btns[1].classList.add('red');
+        // } else {
+        //     btns[1].classList.remove('red');
+        // }
+        btns[1].classList.toggle('red');
+    });
+    btns[0].classList.className();  // old
+
+    // delegated events
+    wrapper.addEventListener('click', (event) => {
+        if (event.target && event.target.tagName == "BUTTON") {
+            console.log('it is button')
+        }
+    });
+    // btns.forEach(btn => {   // not work on dynamic created elements
+    //     btn.addEventListener('click', () => {
+    //         console.log('Hello from old buttons');
+    //     })
+    // });
+    const btn = document.createElement('button');
+    btn.classList.add('red');
+    wrapper.append(btn);
+
+    // with class
+    wrapper.addEventListener('click', (event) => {
+        if (event.target && event.target.matches("button.red")) {
+            console.log('it is RED button')
+        }
+    });
+}
+// setTimeout
+{
+    const timerId = setTimeout(function(text) {
+        console.log('hello');
+    }, 2000);
+    clearInterval(timerId);
+    const timerThreeArg = setTimeout(function(text) {
+        console.log(text);
+    }, 3000, 'three argumnets');
+    const timerFunction = setTimeout(timerFun, 1000);
+    function timerFun() {
+        console.log('text');
+    }
+
+    // setInterval not wait. for step by step - recursion setTimeout
+    let id = setTimeout(function log(){
+        console.log('recursion setTimeout');
+        id = setTimeout(log, 500);
+    });
+
+    function simpleAnimation() {
+        const elem = document.querySelector('.box');
+        let pos = 0;
+        const id = setInterval(frame, 10);
+        function frame() {
+            if (pos == 300) {
+                clearInterval(id);
+            } else {
+                pos++;
+                elem.style.top = pos + "px";
+                elem.style.left = pos + "px";
+            }
+        }
+    }
+    simpleAnimation();
+}
+// date
+{
+    const defaultDate =  new Date();
+    const zeroDate = new Date(0), // 1970-01-01T00:00:00.000Z
+          anyDateAnyFormat = new Date('2020-05-01');   // = new Date.parse('2020-05-01');
+    console.log(anyDateAnyFormat);
+    
+    console.log(defaultDate.getFullYear());
+    console.log(defaultDate.getMonth());
+    console.log(defaultDate.getDate());
+    console.log(defaultDate.getDay());
+    console.log(defaultDate.getHours());
+    
+    console.log(defaultDate.getUTCHours());  // UTC
+    console.log(defaultDate.getTimezoneOffset());
+    console.log(defaultDate.getTime());
+    
+    console.log(anyDateAnyFormat.setHours(18));
+    console.log(anyDateAnyFormat);
+    
+    let start = new Date();
+    for (let i = 0; i < 1000000; i++) {
+        let some = i ** 3;
+    }
+    let end = new Date();
+    console.log(`Time of cycle ${end - start} seconds`);
+}
+// width height scroll
+{
+    const width = box.clientWidth;
+    const width2 = box.offsetWidth;
+    const width3 = box.scrollWidth;
+
+    btn.addEventListener('click', () => {
+        // box.style.height = box.scrollHeight + 'px';
+        console.log(box.scrollTop);
+    });
+
+    console.log(box.getBoundingClientRect());
+
+    const style = window.getComputedStyle(box);
+    console.log(style.display);
+
+    window.scrollTo(0,220);
+}
+// function-constructors 
+{
+    function User(name, id) {
+        this.name = name;
+        this.id = id;
+        this.human = true;
+        this.hello = function() {
+            console.log(`Hello ${this.name}`);
+        };
+    }
+    let ivan = new User('Ivan', 23);
+    
+    User.prototype.exit = function() {
+        console.log(`User ${this.name} escape`)
+    };
+}
+// this   objects   constructor classes    call, apply, bind   arrow function
+{
+    // 1) regular function: this = window, strict mode - undefined
+    // 2) context for object methods - the object itself
+    // 3) in constructors and classes, this is a new instance of the object
+    // 4) manual binding this: call, apply, bind
+
+    // 1 regular
+    function showThis(a, b) {
+        function sum() {
+            return a + b;
+        }
+        console.log(sum());
+    }
+    showThis(4, 5);
+
+    //2 objects
+    const obj = {
+        a: 20,
+        b: 15,
+        sum: function() {
+            console.log(this);
+        }
+    };
+    obj.sum();
+
+    // 3 constructors and classes
+    function User(name, id) {
+        this.name = name;
+        this.id = id;
+        this.human = true;
+        this.hello = function() {
+            console.log(`Hello ${this.name}`);
+        };
+    }
+    let ivan = new User('Ivan', 23);
+
+    // 4 call apply
+    function sayName(surname) {
+        console.log(this);
+        console.log(this.name + ' ' + surname);
+    }
+    const user = {
+        name: 'John'
+    };
+    sayName.call(user, 'Smith');
+    sayName.apply(user, ['Smith']);
+
+    // 4 bind
+    function count(num) {
+        return this*num;
+    }
+    const double = count.bind(2);
+    console.log(double(13));
+
+    // examples
+    const btn = document.querySelector('button');
+    btn.addEventListener('click', function() {   // not in arrow =>
+        this.style.backgroundColor = 'red';
+    });
+    btn.addEventListener('mouseenter', (e) => {   // in arrow! => e.target
+        e.target.style.backgroundColor = 'pink';
+    });
+
+    // arrow function takes parent context
+    const objArrows = {
+        num: 5,
+        sayNumber: function() {
+            const say = () => {
+                console.log(this.num);
+            };
+            say();
+        }
+    };
+    objArrows.sayNumber();
+}
+// class constructor extends
+{
+    class Rectangle {
+        constructor(height, width) {
+            this.height = height;
+            this.width = width;
+        }
+        calcArea() {
+            return this.height * this.width;
+        }
+    }
+    
+    class ColoredRectangleWithText extends Rectangle {
+        constructor(height, width, text, bgColor) {
+            super(height, width); // call constructor parent
+            this.text = text;
+            this.bgColor = bgColor;
+        }
+        showMyProps() {
+            console.log(`Text: ${this.text}, color: ${this.bgColor}`)
+        }
+    }
+    
+    const div = new ColoredRectangleWithText(4, 6, 'hello!', 'green');
+    div.showMyProps();
+    console.log(div.calcArea());
 }

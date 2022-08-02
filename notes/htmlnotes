@@ -1,0 +1,14 @@
+
+
+
+<!-- DEFER - only when DOM is ready - load 1 script, then 2, then 3..-->
+<body>
+	<script defer src="js/script.js"></script> 
+    <script defer src="js/test.js"></script>
+	<p>Hello world!</p>
+</body>
+<!-- ASYNC - scripts not wait each other -->
+<body>
+	<script async src="js/script.js"></script> 
+    <script async src="js/test.js"></script>
+</body>
