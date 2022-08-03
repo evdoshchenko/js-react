@@ -692,3 +692,53 @@
     div.showMyProps();
     console.log(div.calcArea());
 }
+// rest operator
+{
+    const log = function(a, b, ...rest) {   // ...anyname
+        console.log(a, b, rest);
+    }
+    log('1', '2', '3', '4');   // 1 2 [ '3', '4' ]
+
+    function calcOrDouble(number, basis = 2) {
+        // basis = basis || 2; // return default 2, first true if not value
+        console.log(number * basis);
+    }
+    calcOrDouble(3);
+}
+// JSON   deep clone
+{
+    const persone = {
+        name: 'Alex',
+        tel: '+971278341034',
+        parents: {
+            one: 'one',
+            two: 'two'
+        }
+    };
+    const clone = JSON.parse(JSON.stringify(persone));
+}
+// AJAX XMLHttpRequest connect to server
+{
+    const inputUsd = document.querySelector('#usd'),
+    inputBtc = document.querySelector('#btc');
+
+    inputUsd.addEventListener('input', () => {
+    const request = new XMLHttpRequest();
+    //          (method, url, async, login, pass);
+    request.open('GET', 'https://blockchain.info/ticker');
+    request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    request.send();
+
+    // status // statusText // response // readyState
+    request.addEventListener('readystatechange', () => {
+        if (request.readyState === 4 && request.status === 200) {
+            console.log(request.response.USD);
+            const data = JSON.parse(request.response);
+            console.log(data.USD);
+            inputBtc.value = +inputUsd.value / data.USD.last;
+        } else {
+            inputBtc.value = "error";
+        }
+    });
+    });
+}
