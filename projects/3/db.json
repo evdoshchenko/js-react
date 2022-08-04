@@ -1,0 +1,28 @@
+{
+  "menu": [
+    {
+      "img": "img/tabs/vegy.jpg",
+      "altimg": "nft standart",
+      "title": "NFT Standart",
+      "descr": "Est sint culpa commodo ex cillum. Incididunt amet veniam eu officia quis consequat irure deserunt sunt elit nisi. Voluptate excepteur cupidatat ut cupidatat laborum occaecat fugiat. Esse nulla sit ad in. Tempor ipsum aliquip nulla voluptate",
+      "price": 2300
+    },
+    {
+      "img": "img/tabs/post.jpg",
+      "altimg": "nft plus",
+      "title": "NFT Plus",
+      "descr": "Occaecat non ullamco eu commodo nisi irure qui amet labore quis elit labore laborum. Esse nulla sit ad in. Tempor ipsum aliquip nulla laboris officia pariatur occaecat officia. Lorem voluptate deserunt adipisicing  mollit aliqua laboris ",
+      "price": 4600
+    },
+    {
+      "img": "img/tabs/elite.jpg",
+      "altimg": "nft gold",
+      "title": "NFT Gold",
+      "descr": "Dolore mollit sit in mollit et. Excepteur qui non do Lorem ullamco occaecat irure in exercitation anim minim Lorem. Elit non ut deserunt irure. Deserunt nulla minim incididunt fugiat consectetur sit ullamco anim enim et. Aute ut est consectetur nisi.",
+      "price": 9200
+    }
+  ],
+  "requests": [
+      
+  ]
+}

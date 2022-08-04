@@ -1,0 +1,6 @@
+        npm init
+                sudo npm i name-namename -g   //  global
+        npm i json-server --save-dev
+        nmp i    //  install all dependencies from package.json
+        json-server db.json 
+npx json-server db.json 

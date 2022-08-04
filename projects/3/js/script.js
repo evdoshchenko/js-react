@@ -221,7 +221,7 @@ window.addEventListener('DOMContentLoaded', () => {
         postData(item);
     });
 
-    function postData(form) {
+    function postData(form) {   // fetch   other way XMLHttpRequest in /other/XMLHttpRequest
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -231,39 +231,32 @@ window.addEventListener('DOMContentLoaded', () => {
                 display: block;
                 margin: 0 auto;
             `;
-            // form.append(statusMessage);
             form.insertAdjacentElement('afterend', statusMessage);
-
-            const request = new XMLHttpRequest();
-            request.open('POST', 'server.php');
-
-            // FormData
-            // // request.setRequestHeader('Content-type', 'multipart/form-data');  // not needed in XMLHttpRequest with form-data
-            // const formData = new FormData(form);
-            // request.send(formData);
-
-            // JSON
-            request.setRequestHeader('Content-type', 'application/json');
+            
             const formData = new FormData(form);
+
             const object = {};
             formData.forEach(function(value, key){
                 object[key] = value;
             });
-            const json = JSON.stringify(object);
-            request.send(json);
-            // + in php file needed decoding json - $_POST = json_decode(file_get_contents("php://input"), true);
 
-            request.addEventListener('load', () => {
-                if (request.status === 200) {
-                    console.log(request.response);
-                    
-                    showThanksModal(message.success);
-                    form.reset();
-                    statusMessage.remove();
-                } else {
-                    showThanksModal(message.failure);
-                }
-            });
+            fetch('server.php', {
+                method: 'POST',
+                HEADERS: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(object)
+            })
+            .then(data => data.text())
+            .then(data => {
+                console.log(data);
+                showThanksModal(message.success);
+                statusMessage.remove();
+            }).catch(() => {        // fetch 404... - not error
+                showThanksModal(message.failure);
+            }).finally(() =>{
+                form.reset();
+            }); 
         });
     }
 
@@ -289,4 +282,21 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }, 40000);
     }
+
+    // fetch('https://jsonplaceholder.typicode.com/todos/2')
+    //     .then(response => response.json())
+    //     .then(json => console.log(json));
+
+    // fetch('https://jsonplaceholder.typicode.com/posts', {
+    //     method: "POST",
+    //     body: JSON.stringify({name: 'Alex'}),
+    //     headers: {
+    //         'Content-type': 'application/json'
+    //     }
+    // });
+    
+    fetch('http://localhost:3000/menu')
+        .then(data => data.json())
+        .then(res => console.log(res));
+
 });

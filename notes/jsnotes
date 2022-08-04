@@ -717,7 +717,7 @@
     };
     const clone = JSON.parse(JSON.stringify(persone));
 }
-// AJAX XMLHttpRequest connect to server
+// + AJAX XMLHttpRequest connect to server
 {
     const inputUsd = document.querySelector('#usd'),
     inputBtc = document.querySelector('#btc');
@@ -742,3 +742,85 @@
     });
     });
 }
+// + promise
+{
+    console.log('data request');
+
+    const req = new Promise(function(resolve, reject){
+        setTimeout(() => {
+            console.log('data preparation...');
+
+            const product = {
+                name: 'TV',
+                price: 2000
+            };
+            resolve(product);
+        }, 1000);
+    });
+
+    req.then((product) => {
+        return new Promise((resolve, reject) => {
+            if (true) {
+                setTimeout(() => {
+                    product.status = 'order';
+                    resolve(product);
+                }, 1000);
+            } else {
+                setTimeout(() => {
+                    product.status = 'order';
+                    reject(product);
+                }, 1000);
+            }
+        });
+    }).then(data => {
+        data.name = `Apple ${data.name}`;
+        data.branded = true;
+        return data;
+    }).then( data => {
+        console.log(data);
+    }).catch(() => {
+        console.log('error');
+    }).finally(() => {
+        console.log('the end');
+    });
+
+    const test = time => {
+        return new Promise(resolve => {
+            setTimeout(() => resolve(), time);
+        });
+    };
+    Promise.all([test(5000), test(10000)]). then(() => {
+        console.log('all resolve');
+    });
+    Promise.race([test(5000), test(10000)]). then(() => {
+        console.log('first resolve');
+    });
+}
+// filter   map   some every   reduce object to Array
+{
+    const names = ['John', 'Paul', 'AliCe', 'HermiOne'];
+    console.log(names.filter(name => name.length < 5)); 
+    console.log(names.map(item => item.toLocaleLowerCase())); 
+    
+    const differents = ['test', 'bug', 'log', 1];
+    console.log(differents.some(item => typeof(item) === 'number'));   // true
+    console.log(differents.every(item => typeof(item) === 'number'));   // false
+    
+    const arr = [4,5,1,3,2,6];      //   4 5 - 9 1 - 10 3 - 13 2 - 15 6 - 21
+    console.log(arr.reduce((sum, current) => {console.log(sum, current);return sum + current;}));
+    // default value ''   -   1. John 2. Paul 3. AliCe 4. HermiOne 
+    console.log(names.reduce((all, current, i) => `${all}${i+1}. ${current} `, ''));
+    
+    const obj = {
+        ivan: 'persone',
+        ann: 'persone',
+        dog: 'animal',
+        cat: 'animal'
+    };
+    const objToArray = Object.entries(obj);
+    const newArray = objToArray
+    .filter(item => item[1] === 'persone')   // [ [ 'ivan', 'persone' ], [ 'ann', 'persone' ] ]
+    .map(item => item[0]);   // [ 'ivan', 'ann' ]
+    console.log(newArray);
+}
+
