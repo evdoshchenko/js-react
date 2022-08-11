@@ -1,4 +1,22 @@
 {
+  "slider": [
+    {
+      "img": "img/slider/food-12.jpg",
+      "alt": "food-12.jpg"
+    },
+    {
+      "img": "img/slider/olive-oil.jpg",
+      "alt": "olive-oil"
+    },
+    {
+      "img": "img/slider/paprika.jpg",
+      "alt": "paprika"
+    },
+    {
+      "img": "img/slider/pepper.jpg",
+      "alt": "pepper"
+    }
+  ],
   "menu": [
     {
       "img": "img/tabs/vegy.jpg",
@@ -10,7 +28,7 @@
     {
       "img": "img/tabs/post.jpg",
       "altimg": "nft plus",
-      "title": "NFT Plus",
+      "title": "NFT Plus+",
       "descr": "Occaecat non ullamco eu commodo nisi irure qui amet labore quis elit labore laborum. Esse nulla sit ad in. Tempor ipsum aliquip nulla laboris officia pariatur occaecat officia. Lorem voluptate deserunt adipisicing  mollit aliqua laboris ",
       "price": 4600
     },
@@ -23,6 +41,120 @@
     }
   ],
   "requests": [
-      
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "id": 9
+    },
+    {
+      "id": 10
+    },
+    {
+      "name": "1111",
+      "phone": "22222",
+      "id": 11
+    },
+    {
+      "name": "11",
+      "phone": "22222",
+      "id": 12
+    },
+    {
+      "name": "a232323",
+      "phone": "23232323232",
+      "id": 13
+    },
+    {
+      "name": "567567",
+      "phone": "234234",
+      "id": 14
+    },
+    {
+      "name": "d1",
+      "phone": "d2",
+      "id": 15
+    },
+    {
+      "name": "567567",
+      "phone": "6785",
+      "id": 16
+    },
+    {
+      "name": "s2",
+      "phone": "s2",
+      "id": 17
+    },
+    {
+      "name": "567567",
+      "phone": "6785",
+      "id": 18
+    },
+    {
+      "name": "234234",
+      "phone": "9295206000",
+      "id": 19
+    },
+    {
+      "name": "567567",
+      "phone": "6785",
+      "id": 20
+    },
+    {
+      "name": "567567",
+      "phone": "6785",
+      "id": 21
+    },
+    {
+      "name": "567567",
+      "phone": "a2222",
+      "id": 22
+    },
+    {
+      "name": "567567",
+      "phone": "1",
+      "id": 23
+    },
+    {
+      "name": "234234",
+      "phone": "6785",
+      "id": 24
+    },
+    {
+      "name": "234234",
+      "phone": "234234",
+      "id": 25
+    },
+    {
+      "name": "567567",
+      "phone": "234234",
+      "id": 26
+    },
+    {
+      "name": "234234",
+      "phone": "234234",
+      "id": 27
+    }
   ]
 }

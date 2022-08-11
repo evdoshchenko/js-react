@@ -1,10 +1,10 @@
-# dependencies
+# depend/node_modules
 /node_modules
 node_modules
-/projects/3/node_modules
-projects/3/node_modules
 /.pnp
 .pnp.js
+/pet
+pet
 
 # testing
 /coverage

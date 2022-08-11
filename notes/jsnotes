@@ -823,4 +823,46 @@
     .map(item => item[0]);   // [ 'ivan', 'ann' ]
     console.log(newArray);
 }
+// localStorage
+{
+    localStorage.setItem('number', 5);
+    localStorage.removeItem('number');
+    localStorage.clear();
+    console.log(localStorage.getItem('number'));
 
+    const form = document.querySelector('body'),
+    change = document.querySelector('#color');
+    if (localStorage.getItem('bg') === 'changed') {
+    form.style.backgroundColor = 'grey';
+    }
+    change.addEventListener('click', () => {
+    if (localStorage.getItem('bg') === 'changed') {
+        localStorage.removeItem('bg');
+        form.style.backgroundColor = 'white';
+    } else {
+        localStorage.setItem('bg', 'changed');
+        form.style.backgroundColor = 'grey';
+    }
+    });
+
+    const persone = {
+    name: 'Alex',
+    age: 25
+    };
+    const serializedPersone = JSON.stringify(persone);
+    localStorage.setItem('user', serializedPersone);
+    console.log(JSON.parse(localStorage.getItem('user')));
+}
+// regular expressions pattern
+{
+    // new RegExp('pattern', 'flags');   // old
+    // /pattern/f                        // i g m
+
+    const ans = prompt('Enter your name');
+    const reg = /\d/ig;                    // \d - digits     \w - words     \s - spaces
+    console.log(ans.search(reg));          // \D - not digits \W - not words \S - not spaces
+    console.log(ans.match(reg));
+    console.log(ans.replace(/./g, '*'));   // /./ - any, for replace . use /\./
+    console.log('12-34-56'.replace(/-/g, ':'));
+    console.log(reg.test(ans));
+}

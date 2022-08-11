@@ -113,8 +113,19 @@
                     </div>
                 </div>
                 <div class="offer__slider-wrapper">
-                    <div class="offer__slide">
-                        <img src="img/slider/pepper.jpg" alt="pepper">
+                    <div class="offer_slider-inner">
+                        <div class="offer__slide">
+                            <img src="img/slider/pepper.jpg" alt="pepper">
+                        </div>
+                        <div class="offer__slide">
+                            <img src="img/slider/food-12.jpg" alt="pepper">
+                        </div>
+                        <div class="offer__slide">
+                            <img src="img/slider/olive-oil.jpg" alt="pepper">
+                        </div>
+                        <div class="offer__slide">
+                            <img src="img/slider/paprika.jpg" alt="pepper">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -132,8 +143,8 @@
                     Choose gender
                 </div>
                 <div class="calculating__choose" id="gender">
-                    <div class="calculating__choose-item calculating__choose-item_active">Woman</div>
-                    <div class="calculating__choose-item">Man</div>
+                    <div id="female" class="calculating__choose-item calculating__choose-item_active">Woman</div>
+                    <div id="male" class="calculating__choose-item">Man</div>
                 </div>
 
                 <div class="calculating__subtitle">
@@ -149,10 +160,10 @@
                     Choose your physical activity
                 </div>
                 <div class="calculating__choose calculating__choose_big">
-                    <div id="low" class="calculating__choose-item">Low activity </div>
-                    <div id="small"  class="calculating__choose-item calculating__choose-item_active">Small activity</div>
-                    <div id="medium" class="calculating__choose-item">Medium activity</div>
-                    <div id="high" class="calculating__choose-item">High activity</div>
+                    <div data-ratio="1.2" id="low" class="calculating__choose-item">Low activity </div>
+                    <div data-ratio="1.375" id="small"  class="calculating__choose-item calculating__choose-item_active">Small activity</div>
+                    <div data-ratio="1.55" id="medium" class="calculating__choose-item">Medium activity</div>
+                    <div data-ratio="1.725" id="high" class="calculating__choose-item">High activity</div>
                 </div>
 
                 <div class="calculating__divider"></div>
@@ -262,6 +273,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

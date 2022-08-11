@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function hideTabContent() {
         tabsContent.forEach(item => {
+            // item.style.display = 'none';
             item.classList.add('hide');
             item.classList.remove('show', 'fade');
         });
@@ -131,6 +132,8 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // window.addEventListener('scroll', showModalByScroll);   //  {once: true} not work
+
     // classes for cards
 
     class MenuCard {
@@ -182,7 +185,7 @@ window.addEventListener('DOMContentLoaded', () => {
         return await res.json();
     };
 
-    getResource('http://localhost:3000/menu')   // without constructor     - 02_createElementWithoutTemplate.js
+    getResource('http://localhost:3000/menu')   // without contructor - 02_createElementWithoutTemplate.js
         .then(data => {                         // using the library Axios - 03_axios
             data.forEach(({img, altimg, title, descr, price}) => {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
@@ -191,130 +194,95 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // classes for slider
 
-    const slides = document.querySelectorAll('.offer__slide'),
-        slider = document.querySelector('.offer__slider'),
-        prev = document.querySelector('.offer__slider-prev'),
-        next = document.querySelector('.offer__slider-next'),
-        total = document.querySelector('#total'),
-        current = document.querySelector('#current'),
-        slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-        slidesField = document.querySelector('.offer_slider-inner'),
-        width = window.getComputedStyle(slidesWrapper).width;
+    const slider = document.querySelectorAll('.offer .container')[1];
 
-    let sliderIndex = 1;
-    let offset = 0;
-
-    if (slides.length < 10) {
-        total.textContent = `0${slides.length}`;
-        current.textContent = `0${sliderIndex}`;
-    } else {
-        total.textContent = slides.length;
-        current.textContent = sliderIndex;
-    }
-
-    slidesField.style.width = 100 * slides.length + '%';
-    slidesField.style.display = 'flex';
-    slidesField.style.transition = '1.5s all';
-
-    slidesWrapper.style.overflow = 'hidden';
-
-    slides.forEach(slide => {
-        slide.style.width = width;
-    });
-
-    slider.style.position = 'relative';
-
-    const indicators = document.createElement('ol'),
-        dots = [];
-    indicators.classList.add('carousel-indicators');
-    slider.append(indicators);
-
-    for (let i = 0; i < slides.length; i++) {
-        const dot = document.createElement('li');
-        dot.setAttribute('data-slide-to', i + 1);
-        dot.classList.add('dot');
-        if (i == 0) {
-            dot.style.opacity = 0.8;
-        }
-        indicators.append(dot);
-        dots.push(dot);
-    }
-
-    function deleteNotDigits(str) {
-        return +str.replace(/\D/g, '');
-    }
-
-    next.addEventListener('click', () => {
-        if (offset == deleteNotDigits(width) * (slides.length - 1)) {
-            offset = 0;
-        } else {
-            offset += deleteNotDigits(width);
+    class Slider {
+        constructor(img, alt, current, total, ...classes) {
+            this.img = img;
+            this.alt = alt;
+            this.current = current;
+            this.total = total;
+            this.classes = classes;
+            // this.parent = document.querySelectorAll(parentSelector);
         }
 
-        slidesField.style.transform = `translateX(-${offset}px)`;
-
-        if (sliderIndex == slides.length) {
-            sliderIndex = 1;
-        } else {
-            sliderIndex++;
-        }
-
-        if (slides.length < 10) {
-            current.textContent = `0${sliderIndex}`;
-        } else {
-            current.textContent = sliderIndex;
-        }
-
-        dots.forEach(dot => dot.style.opacity = '.4');
-        dots[sliderIndex - 1].style.opacity = '.8';
-    });
-
-    prev.addEventListener('click', () => {
-        if (offset == 0) {
-            offset = deleteNotDigits(width) * (slides.length - 1);
-        } else {
-            offset -= deleteNotDigits(width);
-        }
-
-        slidesField.style.transform = `translateX(-${offset}px)`;
-
-        if (sliderIndex == 1) {
-            sliderIndex = slides.length;
-        } else {
-            sliderIndex--;
-        }
-
-        if (slides.length < 10) {
-            current.textContent = `0${sliderIndex}`;
-        } else {
-            current.textContent = sliderIndex;
-        }
-
-        dots.forEach(dot => dot.style.opacity = '.4');
-        dots[sliderIndex - 1].style.opacity = '.8';
-    });
-
-    dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-            const slideTo = e.target.getAttribute('data-slide-to');
-
-            sliderIndex = slideTo;
-            offset = deleteNotDigits(width) * (slideTo - 1);
-
-            slidesField.style.transform = `translateX(-${offset}px)`;
-
-            if (slides.length < 10) {
-                current.textContent = `0${sliderIndex}`;
+        render() {
+            console.log('1');
+            const element = document.createElement('div');
+            if (this.classes.length === 0) {
+                this.element = 'offer__slider';
+                element.classList.add(this.element);
             } else {
-                current.textContent = sliderIndex;
+                this.classes.forEach(className => element.classList.add(className));
             }
+            element.innerHTML =`
+                <div class="offer__slider-counter">
+                    <div class="offer__slider-prev" data-slider-prev>
+                        <img src="icons/left.svg" alt="prev">
+                    </div>
+                    <span id="current">${this.current}</span>
+                    /
+                    <span id="total">${this.total}</span>
+                    <div class="offer__slider-next" data-slider-next>
+                        <img src="icons/right.svg" alt="next">
+                    </div>
+                </div>
+                <div class="offer__slider-wrapper">
+                    <div class="offer__slide">
+                        <img src="${this.img}" alt="${this.alt}">
+                    </div>
+                </div>
+            `;
+            // console.log(parent);
+            slider.append(element);
+        }
+    }
 
-            dots.forEach(dot => dot.style.opacity = '.4');
-            dots[sliderIndex - 1].style.opacity = '.8';
+
+    
+    getResource('http://localhost:3000/slider')
+        .then(data => {
+
+            // for (let i = 0; i < data.length; i++) {
+
+            // }
+            new Slider(data[0].img, data[0].alt, 0+1, data.length).render();
         });
-    });
 
-    // //forms
+    slider.addEventListener('click', (e) => {
+        let current = +slider.querySelector('#current').textContent,
+            total = +slider.querySelector('#total').textContent,
+            currentSlider = slider.querySelector('.offer__slider'),
+            next = current,
+            prev = current - 2;
+        if (next == total) {next = 0;}
+        if (current == 1) {prev = total-1;}
+        if (e.target.getAttribute('data-slider-next') == ''){
+            console.log('next');
+            console.log(current);
+
+            currentSlider.remove();
+            getResource('http://localhost:3000/slider')
+            .then(data => {
+                new Slider(data[next].img, data[next].alt, next+1, data.length).render();
+            });
+
+        }
+        if (e.target.getAttribute('data-slider-prev') == ''){
+            console.log('prev');
+
+            currentSlider.remove();
+            getResource('http://localhost:3000/slider')
+            .then(data => {
+                new Slider(data[prev].img, data[prev].alt, prev+1, data.length).render();
+            });
+        }
+        // if (e.target. == ''){
+        //     console.log('next');
+        // }
+        // console.log(e.target);
+    });    
+    //forms
 
     const forms = document.querySelectorAll('form');
     const message = {
@@ -393,116 +361,4 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 400000);
     }
 
-    // Calc
-
-    const result = document.querySelector('.calculating__result span');
-    let sex, height, weight, age, ratio;
-
-    if (localStorage.getItem('sex')) {
-        sex = localStorage.getItem('sex');
-    } else {
-        sex = 'female';
-        localStorage.setItem('sex', 'female');
-    }
-
-    if (localStorage.getItem('ratio')) {
-        ratio = localStorage.getItem('ratio');
-    } else {
-        ratio = 1.375;
-        localStorage.setItem('ratio', 1.375);
-    }
-
-    function initLocalSettings(selector, activeClass) {
-        const elements = document.querySelectorAll(selector);
-
-        elements.forEach(elem => {
-            elem.classList.remove(activeClass);
-            if (elem.getAttribute('id') === localStorage.getItem('sex')) {
-                elem.classList.add(activeClass);
-            } 
-            if (elem.getAttribute('data-ratio') === localStorage.getItem('ratio')) {
-                elem.classList.add(activeClass);
-            }
-        });
-    }
-
-    initLocalSettings('#gender div', 'calculating__choose-item_active');
-    initLocalSettings('.calculating__choose_big div', 'calculating__choose-item_active');
-
-    function calcTotal() {
-        console.log(sex, height, weight, age, ratio);
-        if (!sex || !height || !weight || !age || !ratio) {
-            result.textContent = '____';
-            return;
-        }
-
-        if (sex === 'female') {
-            result.textContent = Math.round(( 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
-        } else {
-            result.textContent = Math.round(( 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
-        }
-    }
-
-    calcTotal();
-
-    function getStaticInformation(selector, activeClass) {
-        const elements = document.querySelectorAll(selector);
-
-        elements.forEach(elem => {
-            elem.addEventListener('click', (e) => {
-                if (e.target.getAttribute('data-ratio')) {
-                    ratio = +e.target.getAttribute('data-ratio');
-                    localStorage.setItem('ratio', +e.target.getAttribute('data-ratio'));
-                } else {
-                    sex = e.target.getAttribute('id');
-                    localStorage.setItem('sex', e.target.getAttribute('id'));
-                }
-    
-                elements.forEach(elem => {
-                    elem.classList.remove(activeClass);
-                });
-    
-                e.target.classList.add(activeClass);
-    
-                calcTotal();
-            });
-        });
-
-    }
-
-    getStaticInformation('#gender div', 'calculating__choose-item_active');
-    getStaticInformation('.calculating__choose_big div', 'calculating__choose-item_active');
-
-    function getDynamicInformation(selector) {
-        const input = document.querySelector(selector);
-
-        input.addEventListener('input', () => {
-
-             if (input.value.match(/\D/g)) {
-                input.style.border = '1px solid red';
-             } else {
-                input.style.border = 'none';
-             }
-
-            switch(input.getAttribute('id')) {
-                case 'height':
-                    height = +input.value;
-                    break;
-                case 'weight':
-                    weight = +input.value;
-                    break;
-                case 'age':
-                    age = +input.value;
-                    break;
-            }
-
-            calcTotal();
-        });
-    }
-
-    getDynamicInformation('#height');
-    getDynamicInformation('#weight');
-    getDynamicInformation('#age');
-
 });
-
