@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "tiny-slider": "^2.9.4"
+  }
+}

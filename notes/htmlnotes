@@ -12,3 +12,8 @@
 	<script async src="js/script.js"></script> 
     <script async src="js/test.js"></script>
 </body>
+<!-- Module - not often use -->
+<body>
+	<script type='module' src="./js/main.js"></script> 
+    <script type='module' src="./js/script.js"></script>
+</body>

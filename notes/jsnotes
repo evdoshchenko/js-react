@@ -866,3 +866,154 @@
     console.log('12-34-56'.replace(/-/g, ':'));
     console.log(reg.test(ans));
 }
+// get set
+{
+    const persone = {
+        age: 25,
+        get userAge() {
+            return this.age;
+        },
+        set userAge(num) {
+            this.age = num;
+        }
+    };
+    console.log(persone.userAge = 30);
+}
+// encapsulation
+{
+    class User {
+        constructor(name, age) {
+            this.name = name;
+            this._age = age;        // with _ - private only on words
+        }
+    
+        get age() {
+            return this._age;
+        }
+        set age(num) {
+            if (typeof(num) === 'number' && num > 0 && num < 110) {
+                this._age = num;
+            } else {
+                console.log('error');
+            }
+        }
+    
+        #surname = 'McCallister';   // new experemental 
+        say = () => {               // new 
+            console.log(`Users name: ${this.name} ${this.#surname}, age: ${this._age}`);
+        }
+    }
+    const kevin = new User('Kevin', 27);
+    console.log(kevin.surname);    // undefined
+    kevin.say();
+}
+// module
+{
+    const number = 1;           // anonymous self-calling function
+    (function(){
+        let number = 2;
+        console.log(number);
+    }());
+    console.log(number);
+
+    const user = (function(){   // object interface
+        const privat = function() {
+            console.log('I am privat');
+        };
+        return {
+            sayHello: privat
+        };
+    }());
+    user.sayHello();
+}
+// exports require
+{
+    // main.js
+    function myModule() {
+    }
+    module.exports = myModule;
+    // script.js
+    const myModule = require('./main');
+}
+// ES6 modules - export import 
+{
+    // main.js
+    export let one = 1;
+    let two = 2, three = 3
+    export {two, three};
+    export default function sayHi() {
+        console.log('hi');
+    }
+    // scripts.js
+    import {one as first, two} from './main';
+    import * as data from './main';
+    import sayHi from './main';
+    console.log(`${first} and ${two} and ${data.three}`);
+    sayHi();
+}
+// try catch
+{
+    try {
+        console.log('normal');
+        console.log(a);
+        console.log('not normal');
+    } catch(e) {    // e.name   e.message   e.stack
+        console.log(`Error: ${e}`);
+    } finally {    // additional
+    
+    }
+    console.log('Still normal');
+}
+// jQuery
+{
+    import $ from 'jquery';
+
+    const btn = $('#btn');
+    $(document).ready(function() {
+        $('.list-item:first').hover(function() {
+            $(this).toggleClass('active');
+        });
+    
+        $('.list-item:eq(2)').on('click', () => {
+            $('.image:even').fadeToggle();
+        });
+    });
+}
+// functions generator
+{
+    function* generator() {
+        yield 'S';
+        yield 'c';
+        yield 'r';
+        yield 'i';
+        yield 'p';
+        yield 't';
+    }
+    const str = generator();
+    console.log(str.next().value);
+    
+    function* count(n) {
+        for (let i = 0; i < n; i++) {
+            yield i;
+        }
+    }
+    for (let k of count(7)) {
+        console.log(k);
+    }
+}
+// animation
+{
+    let pos = 0;
+    function myAnimation() {
+        pos++;
+        elem.style.top = pos + "px";
+        elem.style.left = pos + 'px';
+        if (pos < 300) {
+            requestAnimationFrame(myAnimation);
+        }
+    }
+    play.addEventListener('click', () => requestAnimationFrame(myAnimation));
+}
+
+
+
