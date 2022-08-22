@@ -166,6 +166,30 @@
     const {border, bg} = options.colors; // destructuring
     console.log(border);
 }
+// destructuring
+{
+    const user = {
+        name: {
+            first: 'Jack',
+            second: 'Daniels'
+        },
+        pass: 'qwerty',
+        rigths: 'user'
+    };
+    const {name: {first, second}, pass, rigths} = user;
+    console.log(first, second, pass, rigths);
+
+    function connect({
+        host = 'localhost',
+        port = 3000,
+        user = 'default'} = {}) {
+            console.log(`host: ${host}, port: ${port}, user: ${user}`)
+    }
+    connect();
+
+    const matrix = [[3, 5], [6, 7]];
+    const [[a, b], [c, d]] = matrix;
+}
 // array sort
 {
     const arr = [1, 2, 3, 6, 8];
@@ -589,7 +613,7 @@
         console.log(`User ${this.name} escape`)
     };
 }
-// this   objects   constructor classes    call, apply, bind   arrow function
+// - this   objects   constructor classes    call, apply, bind   arrow function
 {
     // 1) regular function: this = window, strict mode - undefined
     // 2) context for object methods - the object itself
