@@ -1,0 +1,10 @@
+    npx create-react-app my-app
+    cd my-app
+    npm start
+
+            npm install node-sass --save
+
+        npm install reactstrap react react-dom
+        npm install --save bootstrap
+        
+        npm install --save styled-components
