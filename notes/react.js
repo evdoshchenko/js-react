@@ -8,3 +8,8 @@
         npm install --save bootstrap
         
         npm install --save styled-components
+
+    npm run build
+
+        npm i react-router-dom
+        npm install prop-types
