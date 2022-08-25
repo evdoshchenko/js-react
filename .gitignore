@@ -1,8 +1,8 @@
 # depend/node_modules
 /node_modules
 node_modules
-/react-sandbox
-react-sandbox
+/react_sandbox
+react_sandbox
 /sandbox
 /.pnp
 .pnp.js
