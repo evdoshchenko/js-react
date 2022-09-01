@@ -1,0 +1,89 @@
+body {
+    font-family: 'Roboto';
+}
+
+/* Background */
+
+.back {
+    width: 100%;
+    height: 768px;
+    background: linear-gradient(180deg, #0837B0 0%, #021E66 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 100px;
+}
+
+/* Counter Block */
+
+.counter-block {
+    width: 300px;
+    height: 300px;
+    background: #FFFFFF;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: auto;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Counter */
+
+.counter {
+    width: 169px;
+    height: 176px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 150px;
+    line-height: 176px;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Blocks */
+
+.blocks {
+    display: flex;
+    justify-content: center;
+}
+
+.block {
+    width: 65px;
+    height: 65px;
+    border-radius: 4px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.plus {
+    background: #089C20;
+}
+
+.minus {
+    background: #E7AA10;
+}
+
+.reset {
+    background: #CF1C1C;
+}
+
+.random {
+    background: #b30c94;
+}
+
+.symbol {
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));
+}
+
+
+
+
+
+

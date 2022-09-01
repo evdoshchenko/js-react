@@ -13,3 +13,9 @@
 
         npm i react-router-dom
         npm install prop-types
+
+
+    
+
+
+    npm install redux react-redux
